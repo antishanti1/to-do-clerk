@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { MdEdit } from "react-icons/md";
 
 interface Task {
@@ -92,7 +92,7 @@ export default function DailyTasks() {
               task.completed ? "opacity-50" : ""
             }`}
           >
-            <div className="flex gap-5 items-center">
+            <div className="flex gap-10 items-center w-full">
               <input
                 type="checkbox"
                 checked={task.completed}
@@ -122,15 +122,17 @@ export default function DailyTasks() {
                 </div>
               ) : (
                 <>
-                  <p>{task.title}</p>
-                  <p>{task.description}</p>
-                  {task.photo && (
-                    <img
-                      src={task.photo}
-                      alt="Task"
-                      style={{ maxWidth: "100px" }}
-                    />
-                  )}
+                  <p className="font-bold">{task.title}</p>
+                  <div className="flex justify-between w-full items-center pr-5">
+                    <p className="text-gray-700">{task.description}</p>
+                    {task.photo && (
+                      <img
+                        src={task.photo}
+                        alt="Task"
+                        style={{ maxWidth: "100px" }}
+                      />
+                    )}
+                  </div>
                 </>
               )}
             </div>
