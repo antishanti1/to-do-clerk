@@ -69,6 +69,7 @@ export default function DailyTasks() {
     setEditedPhotoFile(null);
   };
 
+  //Endpoint: '/tasks/{taskId}' method: 'PUT/PATCH'; Inputs: Task object containing updated title, description, completed, photo  Outputs: The updated Task object.
   const handleCompleteTask = (id: number) => {
     const updatedTasks = tasks.map((task) =>
       task.id === id ? { ...task, completed: !task.completed } : task
@@ -80,6 +81,31 @@ export default function DailyTasks() {
   const handleDeleteTask = (id: number) => {
     const updatedTasks = tasks.filter((task) => task.id !== id);
     setTasks(updatedTasks);
+  };
+
+  const handlePhotoUpload = () => {
+    if (/Android|webOS|iPhone|iPad/i.test(navigator.userAgent)) {
+      const input = document.createElement("input");
+      input.type = "file";
+      input.accept = "image/*";
+      input.capture = "environment";
+      input.click();
+      input.onchange = (event) => {
+        if (event.target.files && event.target.files[0]) {
+          setEditedPhotoFile(event.target.files[0]);
+        }
+      };
+    } else {
+      const input = document.createElement("input");
+      input.type = "file";
+      input.accept = "image/*";
+      input.click();
+      input.onchange = (event) => {
+        if (event.target.files && event.target.files[0]) {
+          setEditedPhotoFile(event.target.files[0]);
+        }
+      };
+    }
   };
 
   return (
@@ -116,12 +142,7 @@ export default function DailyTasks() {
                     onChange={(e) => setEditedDescription(e.target.value)}
                   />
                   <div className="flex items-center">
-                    <input
-                      type="file"
-                      onChange={(e) =>
-                        setEditedPhotoFile(e.target.files && e.target.files[0])
-                      }
-                    />
+                    <button onClick={handlePhotoUpload}>Upload Photo</button>
                   </div>
                 </div>
               ) : (
