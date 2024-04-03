@@ -1,5 +1,6 @@
 import { SignInButton } from "@clerk/clerk-react";
-import { SignUpButton } from "@clerk/clerk-react";
+// import { SignUpButton } from "@clerk/clerk-react";
+import { Link } from "react-router-dom";
 
 export default function Home() {
   return (
@@ -19,11 +20,16 @@ export default function Home() {
               Sign in
             </button>
           </SignInButton>
-          <SignUpButton mode="modal" redirectUrl="/dashboard">
+          {/* <SignUpButton mode="modal" redirectUrl="/dashboard">
             <button className="bg-slate-500 hover:bg-slate-700 text-white font-bold py-2 px-10 rounded-xl">
               Sign Up
             </button>
-          </SignUpButton>
+          </SignUpButton> */}
+          <Link to="/signUpForm">
+            <button className="bg-slate-500 hover:bg-slate-700 text-white font-bold py-2 px-10 rounded-xl">
+              Sign Up
+            </button>
+          </Link>
         </div>
       </div>
     </section>

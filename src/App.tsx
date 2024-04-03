@@ -7,6 +7,7 @@ import {
 import "./index.css";
 import Home from "./Home";
 import Dashboard from "./Dashboard";
+import SignUpForm from "./signUp";
 import { SignedIn, SignedOut } from "@clerk/clerk-react";
 
 const router = createBrowserRouter(
@@ -27,6 +28,7 @@ const router = createBrowserRouter(
           </>
         }
       />
+      <Route path="/signUpForm" element={<SignUpForm />} />
     </>
   )
 );
