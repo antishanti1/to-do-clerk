@@ -10,7 +10,7 @@ export default function Dashboard() {
         <Menu />
         <div className="w-full">
           <Header />
-          <div className="flex bg-white h-screen rounded-xl p-5 mt-5">
+          <div>
             <DailyTasks />
           </div>
         </div>
