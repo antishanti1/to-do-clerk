@@ -57,42 +57,59 @@ export default function SignUpForm() {
   };
 
   return (
-    <div>
-      {!verifying && (
-        <form>
-          <div>
-            <label htmlFor="email">Email</label>
-            <input
-              onChange={(e) => setEmailAddress(e.target.value)}
-              id="email"
-              name="email"
-              type="email"
-            />
-          </div>
-          <div>
-            <label htmlFor="password">Password</label>
-            <input
-              onChange={(e) => setPassword(e.target.value)}
-              id="password"
-              name="password"
-              type="password"
-            />
-          </div>
-          <button onClick={handleSubmit}>Sign up</button>
-        </form>
-      )}
-      {verifying && (
-        <div>
-          <form>
-            <input
-              value={code}
-              placeholder="Code..."
-              onChange={(e) => setCode(e.target.value)}
-            />
-            <button onClick={handleVerify}>Verify Email</button>
+    <section className="bg-slate-100 h-screen flex flex-col items-center justify-center">
+      <div className="bg-white p-5 rounded-3xl flex flex-col items-center w-1/2 py-[10%]">
+        {!verifying && (
+          <form className="flex flex-col gap-5 items-center">
+            <div>
+              <label htmlFor="email">Email</label>
+              <input
+                className="rounded-xl px-2 border-solid border-2 border-slate-10 ml-5 pl-5"
+                onChange={(e) => setEmailAddress(e.target.value)}
+                id="email"
+                name="email"
+                type="email"
+              />
+            </div>
+            <div>
+              <label htmlFor="password">Password</label>
+              <input
+                className="rounded-xl px-2 border-solid border-2 border-slate-10 ml-5 pl-5"
+                onChange={(e) => setPassword(e.target.value)}
+                id="password"
+                name="password"
+                type="password"
+              />
+            </div>
+            <div className="flex justify-center w-full">
+              <button
+                className="bg-slate-500 hover:bg-slate-700 text-white font-bold py-2 px-10 rounded-xl"
+                onClick={handleSubmit}
+              >
+                Sign up
+              </button>
+            </div>
           </form>
-        </div>
-      )}
-    </div>
+        )}
+        {verifying && (
+          <div>
+            <form>
+              <input
+                className="rounded-xl px-2 border-solid border-2 border-slate-10 mr-5 pl-5"
+                value={code}
+                placeholder="Code..."
+                onChange={(e) => setCode(e.target.value)}
+              />
+              <button
+                className="bg-slate-500 hover:bg-slate-700 text-white font-bold py-2 px-10 rounded-xl"
+                onClick={handleVerify}
+              >
+                Verify Email
+              </button>
+            </form>
+          </div>
+        )}
+      </div>
+    </section>
   );
 }
