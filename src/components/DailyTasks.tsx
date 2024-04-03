@@ -16,6 +16,7 @@ export default function DailyTasks() {
   const [editedDescription, setEditedDescription] = useState<string>("");
   const [editedPhotoFile, setEditedPhotoFile] = useState<File | null>(null);
 
+  //Endpoint: '/tasks' method: 'GET'; Inputs: none. Outputs: List of Task objects.
   useEffect(() => {
     const storedTasks = JSON.parse(localStorage.getItem("tasks") || "[]");
     setTasks(storedTasks);
@@ -25,7 +26,7 @@ export default function DailyTasks() {
     localStorage.setItem("tasks", JSON.stringify(tasks));
   }, [tasks]);
 
-  //Endpoint: '/api/tasks' method: 'GET'; inputs: none;  Outputs: An array of Task objects representing all tasks in the system.
+  //Endpoint: '/tasks' method: 'POST'; Inputs: Task object containing title, description, and completed fields.  Outputs: The newly created Task object.
   const handleAddTask = () => {
     const newTask: Task = {
       id: tasks.length + 1,
