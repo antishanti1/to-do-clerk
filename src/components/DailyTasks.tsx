@@ -6,6 +6,7 @@ interface Task {
   title: string;
   description: string;
   completed: boolean;
+  photo?: string;
 }
 
 export default function DailyTasks() {
@@ -13,6 +14,7 @@ export default function DailyTasks() {
   const [editingTask, setEditingTask] = useState<Task | null>(null);
   const [editedTitle, setEditedTitle] = useState<string>("");
   const [editedDescription, setEditedDescription] = useState<string>("");
+  const [editedPhotoFile, setEditedPhotoFile] = useState<File | null>(null);
 
   useEffect(() => {
     const storedTasks = JSON.parse(localStorage.getItem("tasks") || "[]");
@@ -43,16 +45,25 @@ export default function DailyTasks() {
     if (editingTask) {
       const updatedTasks = tasks.map((task) =>
         task.id === editingTask.id
-          ? { ...task, title: editedTitle, description: editedDescription }
+          ? {
+              ...task,
+              title: editedTitle,
+              description: editedDescription,
+              photo: editedPhotoFile
+                ? URL.createObjectURL(editedPhotoFile)
+                : task.photo,
+            }
           : task
       );
       setTasks(updatedTasks);
       setEditingTask(null);
+      setEditedPhotoFile(null);
     }
   };
 
   const handleCancelEdit = () => {
     setEditingTask(null);
+    setEditedPhotoFile(null);
   };
 
   const handleCompleteTask = (id: number) => {
@@ -81,7 +92,7 @@ export default function DailyTasks() {
               task.completed ? "opacity-50" : ""
             }`}
           >
-            <div className="flex gap-5">
+            <div className="flex gap-5 items-center">
               <input
                 type="checkbox"
                 checked={task.completed}
@@ -96,15 +107,30 @@ export default function DailyTasks() {
                     onChange={(e) => setEditedTitle(e.target.value)}
                   />
                   <textarea
-                    className="rounded-xl w-full pl-5 "
+                    className="rounded-xl w-full block "
                     value={editedDescription}
                     onChange={(e) => setEditedDescription(e.target.value)}
                   />
+                  <div className="flex items-center">
+                    <input
+                      type="file"
+                      onChange={(e) =>
+                        setEditedPhotoFile(e.target.files && e.target.files[0])
+                      }
+                    />
+                  </div>
                 </div>
               ) : (
                 <>
                   <p>{task.title}</p>
                   <p>{task.description}</p>
+                  {task.photo && (
+                    <img
+                      src={task.photo}
+                      alt="Task"
+                      style={{ maxWidth: "100px" }}
+                    />
+                  )}
                 </>
               )}
             </div>
