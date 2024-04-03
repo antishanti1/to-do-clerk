@@ -25,6 +25,7 @@ export default function DailyTasks() {
     localStorage.setItem("tasks", JSON.stringify(tasks));
   }, [tasks]);
 
+  //Endpoint: '/api/tasks' method: 'GET'; inputs: none;  Outputs: An array of Task objects representing all tasks in the system.
   const handleAddTask = () => {
     const newTask: Task = {
       id: tasks.length + 1,
@@ -35,6 +36,7 @@ export default function DailyTasks() {
     setTasks([...tasks, newTask]);
   };
 
+  //Endpoint: '/tasks/{taskId}' method: 'PUT/PATCH'; Inputs: Task object containing updated title, description, completed, photo  Outputs: The updated Task object.
   const handleEditTask = (task: Task) => {
     setEditingTask(task);
     setEditedTitle(task.title);
@@ -73,6 +75,7 @@ export default function DailyTasks() {
     setTasks(updatedTasks);
   };
 
+  //Endpoint: '/tasks/{taskId}' method: 'DELETE'; Inputs: ID of the task to delete. Outputs: none.
   const handleDeleteTask = (id: number) => {
     const updatedTasks = tasks.filter((task) => task.id !== id);
     setTasks(updatedTasks);
