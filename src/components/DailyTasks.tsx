@@ -96,7 +96,7 @@ export default function DailyTasks() {
                     onChange={(e) => setEditedTitle(e.target.value)}
                   />
                   <textarea
-                    className="rounded-xl w-full block "
+                    className="rounded-xl w-full pl-5 "
                     value={editedDescription}
                     onChange={(e) => setEditedDescription(e.target.value)}
                   />

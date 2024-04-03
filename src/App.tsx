@@ -7,7 +7,7 @@ import {
 import "./index.css";
 import Home from "./Home";
 import Dashboard from "./Dashboard";
-import { RedirectToSignIn, SignedIn, SignedOut } from "@clerk/clerk-react";
+import { SignedIn, SignedOut } from "@clerk/clerk-react";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -22,7 +22,7 @@ const router = createBrowserRouter(
             </SignedIn>
 
             <SignedOut>
-              <RedirectToSignIn />
+              <Home />
             </SignedOut>
           </>
         }
