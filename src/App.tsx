@@ -1,12 +1,40 @@
-import React from "react";
-import Auth from "./pages/auth";
+import {
+  createBrowserRouter,
+  createRoutesFromElements,
+  Route,
+  RouterProvider,
+} from "react-router-dom";
+import "./index.css";
+import Home from "./Home";
+import Dashboard from "./Dashboard";
+import { RedirectToSignIn, SignedIn, SignedOut } from "@clerk/clerk-react";
 
-function App() {
+const router = createBrowserRouter(
+  createRoutesFromElements(
+    <>
+      <Route index element={<Home />} />
+      <Route
+        path="/dashboard"
+        element={
+          <>
+            <SignedIn>
+              <Dashboard />
+            </SignedIn>
+
+            <SignedOut>
+              <RedirectToSignIn />
+            </SignedOut>
+          </>
+        }
+      />
+    </>
+  )
+);
+
+export default function App() {
   return (
-    <div>
-      <Auth />
-    </div>
+    <>
+      <RouterProvider router={router} />
+    </>
   );
 }
-
-export default App;
